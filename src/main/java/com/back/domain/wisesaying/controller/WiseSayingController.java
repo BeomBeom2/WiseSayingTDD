@@ -1,9 +1,8 @@
 package com.back.domain.wisesaying.controller;
 
-import com.back.domain.entity.WiseSaying;
+import com.back.domain.wisesaying.entity.WiseSaying;
 import com.back.domain.system.service.WiseSayingService;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WiseSayingController {

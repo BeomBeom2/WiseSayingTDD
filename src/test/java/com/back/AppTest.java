@@ -13,11 +13,7 @@ public class AppTest {
     @Test
     @DisplayName("`== 명언 앱 ==` 출력")
     void t1() {
-        Scanner scanner = TestUtil.genScanner("종료");
-
-        ByteArrayOutputStream output = TestUtil.setOutToByteArray();
-        new App(scanner).run();
-        String rs = output.toString();
+        String rs = AppTestRunner.run("종료");
 
         assertThat(rs)
                 .contains("== 명언 앱 ==");

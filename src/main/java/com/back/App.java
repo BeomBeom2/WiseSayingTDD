@@ -10,7 +10,7 @@ public class App {
 
     public void run() {
         System.out.println("== 명언 앱 ==");
-
+        int idx = 0;
         while(true) {
             System.out.print("명령) ");
             String cmd = sc.nextLine().trim();
@@ -22,7 +22,8 @@ public class App {
                 String content = sc.nextLine().trim();
                 System.out.print("작가 : ");
                 String writer = sc.nextLine().trim();
-                System.out.println("1번 명언이 등록되었습니다.");
+                idx++;
+                System.out.println(idx + "번 명언이 등록되었습니다.");
             }
         }
     }

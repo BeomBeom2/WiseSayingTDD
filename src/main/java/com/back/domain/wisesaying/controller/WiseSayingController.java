@@ -1,14 +1,14 @@
 package com.back.domain.wisesaying.controller;
 
 import com.back.domain.entity.WiseSaying;
+import com.back.domain.system.service.WiseSayingService;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WiseSayingController {
+    WiseSayingService service = new WiseSayingService();
     Scanner sc;
-    int idx = 0;
-    ArrayList<WiseSaying> list = new ArrayList<>();
 
     public WiseSayingController(Scanner sc) {
         this.sc = sc;
@@ -19,8 +19,8 @@ public class WiseSayingController {
         String content = sc.nextLine().trim();
         System.out.print("작가 : ");
         String writer = sc.nextLine().trim();
-        idx++;
-        list.add(new WiseSaying(idx, writer, content));
+        int idx = service.enroll(writer, content);
+
         System.out.println(idx + "번 명언이 등록되었습니다.");
 
     }
@@ -29,6 +29,8 @@ public class WiseSayingController {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
 
-        list.reversed().forEach(obj -> System.out.println(obj.getId() + " / " + obj.getWriter() + " / " + obj.getContent()));
+        for(WiseSaying cur : service.findForList()){
+            System.out.println(cur.getId() + " / " + cur.getWriter() + " / " + cur.getContent());
+        }
     }
 }

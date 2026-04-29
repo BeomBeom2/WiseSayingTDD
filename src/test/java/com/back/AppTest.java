@@ -16,7 +16,8 @@ public class AppTest {
         String rs = AppTestRunner.run("");
 
         assertThat(rs)
-                .contains("== 명언 앱 ==");
+                .contains("== 명언 앱 ==")
+                .contains("명령) ");
     }
 
     @Test
@@ -29,7 +30,6 @@ public class AppTest {
                 """);
 
         assertThat(rs)
-                .contains("명령) ")
                 .contains("명언 : ")
                 .contains("작가 : ");
     }

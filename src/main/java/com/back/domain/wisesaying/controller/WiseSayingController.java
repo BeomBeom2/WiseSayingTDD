@@ -1,4 +1,4 @@
-package com.back.domain;
+package com.back.domain.wisesaying.controller;
 
 import com.back.domain.entity.WiseSaying;
 

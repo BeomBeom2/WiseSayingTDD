@@ -1,4 +1,4 @@
-package com.back.domain;
+package com.back.domain.system.controller;
 
 public class SystemController {
     public void actionExit() {

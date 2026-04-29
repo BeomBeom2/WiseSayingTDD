@@ -1,7 +1,7 @@
 package com.back;
 
-import com.back.domain.SystemController;
-import com.back.domain.WiseSayingController;
+import com.back.domain.system.controller.SystemController;
+import com.back.domain.wisesaying.controller.WiseSayingController;
 
 import java.util.Scanner;
 

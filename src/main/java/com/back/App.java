@@ -15,22 +15,25 @@ public class App {
     }
 
     public void run() {
-        WiseSayingController wiseSayingController = new WiseSayingController(this.sc);
-        SystemController systemController = new SystemController();
+        WiseSayingController wiseSayingController = AppContext.wiseSayingController;
+        SystemController systemController = AppContext.systemController;
 
         System.out.println("== 명언 앱 ==");
 
         while (true) {
             System.out.print("명령) ");
             String cmd = sc.nextLine().trim();
+            String actionName = cmd.split("\\?", 2)[0];
 
-            if (cmd.equals("종료")) {
+            if (actionName.equals("종료")) {
                 systemController.actionExit();
                 return;
-            } else if (cmd.equals("등록")) {
+            } else if (actionName.equals("등록")) {
                 wiseSayingController.actionEnroll();
-            } else if (cmd.equals("목록")) {
+            } else if (actionName.equals("목록")) {
                 wiseSayingController.actionPrint();
+            } else if(actionName.equals("삭제")) {
+                wiseSayingController.actionDelete(cmd);
             }
         }
     }

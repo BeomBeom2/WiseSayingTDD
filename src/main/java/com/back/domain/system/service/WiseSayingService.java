@@ -19,4 +19,14 @@ public class WiseSayingService {
     public List<WiseSaying> findForList() {
         return repository.findForList();
     }
+
+    public boolean delete(int id) {
+        WiseSaying wiseSaying = repository.findById(id);
+
+        if ( wiseSaying == null ) return false;
+
+        repository.delete(wiseSaying);
+
+        return true;
+    }
 }

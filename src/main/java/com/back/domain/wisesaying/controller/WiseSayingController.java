@@ -4,11 +4,14 @@ import com.back.AppContext;
 import com.back.domain.wisesaying.entity.WiseSaying;
 import com.back.domain.system.service.WiseSayingService;
 
+import java.util.Arrays;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class WiseSayingController {
-    WiseSayingService service = new WiseSayingService();
-    Scanner sc;
+    final WiseSayingService  service;
+    final Scanner sc;
 
     public WiseSayingController() {
         this.sc = AppContext.scanner;
@@ -33,5 +36,22 @@ public class WiseSayingController {
         for(WiseSaying cur : service.findForList()){
             System.out.println(cur.getId() + " / " + cur.getWriter() + " / " + cur.getContent());
         }
+    }
+
+    public void actionDelete(String cmd) {
+        String[] splits = cmd.split("\\?");
+        if(splits.length < 2) return;
+
+        Map<String, String> params = Arrays
+                .stream(splits[1].split("&"))
+                .map(e -> e.split("=", 2))
+                .filter(e -> e.length == 2 && !e[0].isBlank() && !e[1].isBlank() )
+                .collect(Collectors.toMap(e -> e[0].trim(), e -> e[1].trim()));
+
+        String delIdx = params.getOrDefault("id", "");
+        if(delIdx.isEmpty()) return;
+        service.delete(Integer.parseInt(delIdx));
+
+        System.out.printf("%s번 명언이 삭제되었습니다.\n", delIdx);
     }
 }

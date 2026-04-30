@@ -1,5 +1,6 @@
 package com.back.domain.system.service;
 
+import com.back.AppContext;
 import com.back.domain.system.repository.WiseSayingRepository;
 import com.back.domain.wisesaying.entity.WiseSaying;
 import java.util.List;
@@ -8,7 +9,7 @@ public class WiseSayingService {
     WiseSayingRepository repository;
 
     public WiseSayingService() {
-        this.repository = new WiseSayingRepository();
+        this.repository = AppContext.wiseSayingRepository;
     }
 
     public int enroll(String writer, String content) {

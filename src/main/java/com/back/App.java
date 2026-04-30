@@ -6,10 +6,12 @@ import com.back.domain.wisesaying.controller.WiseSayingController;
 import java.util.Scanner;
 
 public class App {
-    private Scanner sc;
+    private final Scanner sc;
 
     public App() {
-        sc = sc = AppContext.sc;
+        Scanner sc1;
+        sc1 = AppContext.scanner;
+        this.sc = sc1;
     }
 
     public void run() {

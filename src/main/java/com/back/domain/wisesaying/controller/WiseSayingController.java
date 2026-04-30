@@ -50,8 +50,11 @@ public class WiseSayingController {
 
         String delIdx = params.getOrDefault("id", "");
         if(delIdx.isEmpty()) return;
-        service.delete(Integer.parseInt(delIdx));
+        boolean isSuccess = service.delete(Integer.parseInt(delIdx));
 
-        System.out.printf("%s번 명언이 삭제되었습니다.\n", delIdx);
+        if(isSuccess)
+            System.out.printf("%s번 명언이 삭제되었습니다.\n", delIdx);
+        else
+            System.out.printf("%s번 명언은 존재하지 않습니다.\n", delIdx);
     }
 }

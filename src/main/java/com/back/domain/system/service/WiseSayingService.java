@@ -20,6 +20,10 @@ public class WiseSayingService {
         return repository.findForList();
     }
 
+    public WiseSaying findById(int id) {
+        return repository.findById(id);
+    }
+
     public boolean delete(int id) {
         WiseSaying wiseSaying = repository.findById(id);
 
@@ -28,5 +32,12 @@ public class WiseSayingService {
         repository.delete(wiseSaying);
 
         return true;
+    }
+
+    public void modify(WiseSaying wiseSaying, String content, String author) {
+        wiseSaying.setContent(content);
+        wiseSaying.setWriter(author);
+
+        repository.save(wiseSaying);
     }
 }

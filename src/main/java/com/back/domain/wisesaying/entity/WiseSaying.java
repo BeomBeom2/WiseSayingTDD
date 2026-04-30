@@ -18,6 +18,9 @@ public class WiseSaying {
         this.id = id;
     }
 
+    public boolean isNew() {
+        return id ==0;
+    }
 
     public String getWriter() { return writer; }
     public void setWriter(String writer) { this.writer = writer; }

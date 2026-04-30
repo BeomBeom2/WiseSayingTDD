@@ -39,4 +39,11 @@ public class WiseSayingRepository {
     public void delete(WiseSaying wiseSaying) {
         wiseSayings.remove(wiseSaying);
     }
+
+    public void save(WiseSaying wiseSaying) {
+        if(wiseSaying.isNew()){
+            wiseSaying.setId(++lastId);
+            wiseSayings.add(wiseSaying);
+        }
+    }
 }

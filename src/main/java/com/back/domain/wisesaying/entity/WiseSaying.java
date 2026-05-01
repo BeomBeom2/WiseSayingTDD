@@ -1,5 +1,13 @@
 package com.back.domain.wisesaying.entity;
 
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 public class WiseSaying {
     private int id;
     private String writer;
@@ -9,22 +17,7 @@ public class WiseSaying {
         this.writer = writer;
         this.content = content;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public boolean isNew() {
         return id ==0;
     }
-
-    public String getWriter() { return writer; }
-    public void setWriter(String writer) { this.writer = writer; }
-
-    public String getContent() { return content; }
-    public void setContent(String content) { this.content = content; }
 }

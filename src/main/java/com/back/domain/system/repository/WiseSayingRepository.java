@@ -34,30 +34,37 @@ public class WiseSayingRepository {
         return wiseSayings.get(index);
     }
 
-    public List<WiseSaying> findForList(String keywordType, String keyword) {
-        if(keywordType.equals("all"))
-            if(keyword.isEmpty())
-                return wiseSayings.reversed();
-            else {
-                    return wiseSayings
-                            .stream()
-                            .filter(e -> e.getWriter().contains(keyword) ||  e.getContent().contains(keyword))
-                            .toList();
-                }
-        else if(keywordType.equals("author")) {
-            return wiseSayings
-                    .stream()
-                    .filter(e -> e.getWriter().contains(keyword))
-                    .toList();
-        }  else if(keywordType.equals("content")) {
-            return wiseSayings
-                    .stream()
-                    .filter(e -> e.getContent().contains(keyword))
-                    .toList();
-        } else {
-            return emptyList();
+    public List<WiseSaying> findForList(String keywordType, String keyword, String pageStr) {
+        int page = pageStr.isEmpty() ? 1 : Integer.parseInt(pageStr);
+        if (page < 1) page = 1;
+
+        int pageSize = 5;
+
+        List<WiseSaying> filtered = wiseSayings.reversed().stream()
+                .filter(e -> {
+                    if (keywordType.equals("all")) {
+                        if (keyword.isEmpty()) return true;
+                        return e.getWriter().contains(keyword) || e.getContent().contains(keyword);
+                    } else if (keywordType.equals("author")) {
+                        return e.getWriter().contains(keyword);
+                    } else if (keywordType.equals("content")) {
+                        return e.getContent().contains(keyword);
+                    }
+                    return false;
+                })
+                .toList();
+
+        int fromIndex = (page - 1) * pageSize;
+
+        if (fromIndex >= filtered.size()) {
+            return List.of();
         }
+
+        int toIndex = Math.min(fromIndex + pageSize, filtered.size());
+
+        return filtered.subList(fromIndex, toIndex);
     }
+
 
     public void delete(WiseSaying wiseSaying) {
         wiseSayings.remove(wiseSaying);

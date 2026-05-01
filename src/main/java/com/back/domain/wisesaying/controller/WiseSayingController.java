@@ -38,7 +38,11 @@ public class WiseSayingController {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
 
-        for(WiseSaying cur : service.findForList(params.getOrDefault("keywordType", "all"), params.getOrDefault("keyword", ""))){
+        for(WiseSaying cur :
+                service.findForList(
+                        params.getOrDefault("keywordType", "all"),
+                        params.getOrDefault("keyword", ""),
+                        params.getOrDefault("page", ""))){
             System.out.println(cur.getId() + " / " + cur.getWriter() + " / " + cur.getContent());
         }
     }

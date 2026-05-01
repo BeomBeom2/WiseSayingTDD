@@ -16,8 +16,8 @@ public class WiseSayingService {
         return repository.enroll(new WiseSaying(writer, content));
     }
 
-    public List<WiseSaying> findForList() {
-        return repository.findForList();
+    public List<WiseSaying> findForList(String keywordType, String keyword) {
+        return repository.findForList(keywordType, keyword);
     }
 
     public WiseSaying findById(int id) {

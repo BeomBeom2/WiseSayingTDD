@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import static java.util.Collections.emptyList;
+
 public class WiseSayingRepository {
     private final List<WiseSaying> wiseSayings = new ArrayList<>();
     private int lastId = 0;
@@ -32,8 +34,22 @@ public class WiseSayingRepository {
         return wiseSayings.get(index);
     }
 
-    public List<WiseSaying> findForList() {
-        return wiseSayings.reversed();
+    public List<WiseSaying> findForList(String keywordType, String keyword) {
+        if(keywordType.equals("all"))
+            return wiseSayings.reversed();
+        else if(keywordType.equals("author")) {
+            return wiseSayings
+                    .stream()
+                    .filter(e -> e.getWriter().contains(keyword))
+                    .toList();
+        }  else if(keywordType.equals("content")) {
+            return wiseSayings
+                    .stream()
+                    .filter(e -> e.getContent().contains(keyword))
+                    .toList();
+        } else {
+            return emptyList();
+        }
     }
 
     public void delete(WiseSaying wiseSaying) {

@@ -32,11 +32,13 @@ public class WiseSayingController {
 
     }
 
-    public void actionPrint() {
+    public void actionPrint(String cmd) {
+        Map<String, String> params = getParams(cmd);
+
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
 
-        for(WiseSaying cur : service.findForList()){
+        for(WiseSaying cur : service.findForList(params.getOrDefault("keywordType", "all"), params.getOrDefault("keyword", ""))){
             System.out.println(cur.getId() + " / " + cur.getWriter() + " / " + cur.getContent());
         }
     }

@@ -31,7 +31,7 @@ public class App {
             } else if (actionName.equals("등록")) {
                 wiseSayingController.actionEnroll();
             } else if (actionName.equals("목록")) {
-                wiseSayingController.actionPrint();
+                wiseSayingController.actionPrint(cmd);
             } else if(actionName.equals("삭제")) {
                 wiseSayingController.actionDelete(cmd);
             } else if(actionName.equals("수정")) {

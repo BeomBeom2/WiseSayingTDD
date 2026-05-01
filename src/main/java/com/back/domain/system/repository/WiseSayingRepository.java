@@ -36,7 +36,14 @@ public class WiseSayingRepository {
 
     public List<WiseSaying> findForList(String keywordType, String keyword) {
         if(keywordType.equals("all"))
-            return wiseSayings.reversed();
+            if(keyword.isEmpty())
+                return wiseSayings.reversed();
+            else {
+                    return wiseSayings
+                            .stream()
+                            .filter(e -> e.getWriter().contains(keyword) ||  e.getContent().contains(keyword))
+                            .toList();
+                }
         else if(keywordType.equals("author")) {
             return wiseSayings
                     .stream()

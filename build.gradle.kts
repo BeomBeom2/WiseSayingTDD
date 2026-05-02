@@ -34,4 +34,5 @@ tasks.withType<JavaCompile> {
 
 tasks.withType<JavaExec> {
     jvmArgs("-Dfile.encoding=UTF-8", "-Dstdout.encoding=UTF-8")
+    standardInput = System.`in`
 }

@@ -233,7 +233,7 @@ public class WiseSayingControllerTest {
     @DisplayName("목록?page=2")
     void t13() {
         String rs = AppTestRunner.run(
-                makeSampleDataAndListCommand()
+                makeSampleDataAndListCommand() + "?page=2"
         );
 
         assertThat(rs)

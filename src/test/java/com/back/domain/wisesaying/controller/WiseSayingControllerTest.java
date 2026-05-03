@@ -186,7 +186,7 @@ public class WiseSayingControllerTest {
         return IntStream
                 .rangeClosed(1, 10)
                 .mapToObj(id -> "등록\n명언 %d\n작자미상 %d".formatted(id, id))
-                .collect(Collectors.joining("\n")) + "\n목록";
+                .collect(Collectors.joining("\n"));
     }
 
 
@@ -233,7 +233,47 @@ public class WiseSayingControllerTest {
     @DisplayName("목록?page=2")
     void t13() {
         String rs = AppTestRunner.run(
-                makeSampleDataAndListCommand() + "?page=2"
+                makeSampleDataAndListCommand() + "\n목록?page=2"
+        );
+
+        assertThat(rs)
+                .doesNotContain("10 / 작자미상 10 / 명언 10")
+                .doesNotContain("9 / 작자미상 9 / 명언 9")
+                .doesNotContain("8 / 작자미상 8 / 명언 8")
+                .doesNotContain("7 / 작자미상 7 / 명언 7")
+                .doesNotContain("6 / 작자미상 6 / 명언 6")
+                .contains("5 / 작자미상 5 / 명언 5")
+                .contains("4 / 작자미상 4 / 명언 4")
+                .contains("3 / 작자미상 3 / 명언 3")
+                .contains("2 / 작자미상 2 / 명언 2")
+                .contains("1 / 작자미상 1 / 명언 1");
+    }
+
+    @Test
+    @DisplayName("목록?keyword=명언")
+    void t14() {
+        String rs = AppTestRunner.run(
+                makeSampleDataAndListCommand() + "\n목록"
+        );
+
+        assertThat(rs)
+                .contains("10 / 작자미상 10 / 명언 10")
+                .contains("9 / 작자미상 9 / 명언 9")
+                .contains("8 / 작자미상 8 / 명언 8")
+                .contains("7 / 작자미상 7 / 명언 7")
+                .contains("6 / 작자미상 6 / 명언 6")
+                .doesNotContain("5 / 작자미상 5 / 명언 5")
+                .doesNotContain("4 / 작자미상 4 / 명언 4")
+                .doesNotContain("3 / 작자미상 3 / 명언 3")
+                .doesNotContain("2 / 작자미상 2 / 명언 2")
+                .doesNotContain("1 / 작자미상 1 / 명언 1");
+    }
+
+    @Test
+    @DisplayName("목록?keyword=명언&page=2")
+    void t15() {
+        String rs = AppTestRunner.run(
+                makeSampleDataAndListCommand() + "\n목록?keyword=명언&page=2"
         );
 
         assertThat(rs)

@@ -29,7 +29,6 @@ public class WiseSayingController {
         int idx = service.enroll(writer, content);
 
         System.out.println(idx + "번 명언이 등록되었습니다.");
-
     }
 
     public void actionPrint(String cmd) {

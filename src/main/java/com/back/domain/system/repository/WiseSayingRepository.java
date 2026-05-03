@@ -1,5 +1,6 @@
 package com.back.domain.system.repository;
 
+import com.back.domain.standard.dto.Pageable;
 import com.back.domain.wisesaying.entity.WiseSaying;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import static java.util.Collections.emptyList;
 
 public class WiseSayingRepository {
     private final List<WiseSaying> wiseSayings = new ArrayList<>();
+    private final Pageable  page = new Pageable(1, 5);
     private int lastId = 0;
 
     public int enroll(WiseSaying wiseSaying) {
@@ -35,10 +37,10 @@ public class WiseSayingRepository {
     }
 
     public List<WiseSaying> findForList(String keywordType, String keyword, String pageStr) {
-        int page = pageStr.isEmpty() ? 1 : Integer.parseInt(pageStr);
-        if (page < 1) page = 1;
 
-        int pageSize = 5;
+        int p = pageStr.isEmpty() ? 1 : Integer.parseInt(pageStr);
+        if (p < 1) page.setPage(1);
+        else page.setPage(p);
 
         List<WiseSaying> filtered = wiseSayings.reversed().stream()
                 .filter(e -> {
@@ -54,15 +56,13 @@ public class WiseSayingRepository {
                 })
                 .toList();
 
-        int fromIndex = (page - 1) * pageSize;
-
-        if (fromIndex >= filtered.size()) {
+        if (page.getSkipCount() >= filtered.size()) {
             return List.of();
         }
 
-        int toIndex = Math.min(fromIndex + pageSize, filtered.size());
+        int toIndex = Math.min(page.getSkipCount() + page.getPageSize(), filtered.size());
 
-        return filtered.subList(fromIndex, toIndex);
+        return filtered.subList(page.getSkipCount() , toIndex);
     }
 
 
